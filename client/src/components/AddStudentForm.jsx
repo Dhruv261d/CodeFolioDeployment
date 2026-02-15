@@ -96,7 +96,7 @@ function AddStudentForm() {
             <label>Branch:</label>
             <select value={branch} onChange={(e) => setBranch(e.target.value)} required className="form-select">
                 <option value="Computer Science">Computer Science</option>
-                <option value="Information Technology">Information Technology</option>
+                <option value="Information Technology">CSBS</option>
                 <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
                 <option value="Mechanical">Mechanical</option>
                 <option value="Civil">Civil</option>

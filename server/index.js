@@ -10,6 +10,16 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
+
+// Check if we are in production (Render) or local
+// const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_JSON 
+//   ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON) 
+//   : require("./serviceAccountKey.json");
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -59,7 +69,7 @@ app.post('/api/students/add', verifyToken, verifyAdmin, async (req, res) => {
     await usersRef.doc(userRecord.uid).set({
         prn, name, email, year, branch,
         role: 'student',
-        rating: 1500, // ADD THIS LINE: Default starting rating
+        rating: 1500, 
         createdAt: admin.firestore.FieldValue.serverTimestamp()
     });
     res.status(201).json({ message: 'Successfully created new student.', uid: userRecord.uid });
@@ -401,7 +411,7 @@ app.post('/api/execute/submit', verifyToken, async (req, res) => {
 
         const { testCases, contestId } = problemDoc.data();
 
-        // 🔒 Contest timing check
+        //  Contest timing check
         const contestDoc = await db.collection('contests').doc(contestId).get();
         if (!contestDoc.exists) {
             return res.status(404).json({ message: 'Contest not found.' });
@@ -411,7 +421,7 @@ app.post('/api/execute/submit', verifyToken, async (req, res) => {
         const now = admin.firestore.Timestamp.now();
         const isContestActive = now.toMillis() >= startTime.toMillis() && now.toMillis() <= endTime.toMillis();
 
-        // ✅ Evaluate submission
+        
         let finalStatus = null;
         let finalMessage = '';
         let failedTestCase = null;
@@ -441,7 +451,7 @@ app.post('/api/execute/submit', verifyToken, async (req, res) => {
             finalMessage = `All ${testCases.length} test cases passed!`;
         }
 
-        // 🏆 Save only if contest is active
+        //  Save only if contest is active
         if (isContestActive) {
             await db.collection('submissions').add({
                 userId,
@@ -454,7 +464,7 @@ app.post('/api/execute/submit', verifyToken, async (req, res) => {
             });
         }
 
-        // 🧪 Always return evaluation result
+        //  Always return evaluation result
         res.status(200).json({
             status: finalStatus,
             message: finalMessage,
