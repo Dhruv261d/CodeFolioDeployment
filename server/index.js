@@ -5,7 +5,8 @@ const cors = require('cors');
 require('dotenv').config();
 const axios = require('axios');
 
-const serviceAccount = require('./serviceAccountKey.json');
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
