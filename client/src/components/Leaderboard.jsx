@@ -23,10 +23,10 @@ function Leaderboard({ contestId, onBack }) {
 
                 // Fetch both leaderboard data and contest details at the same time
                 const [leaderboardRes, contestRes] = await Promise.all([
-                    fetch(`http://localhost:5000/api/contests/${contestId}/leaderboard`, {
+                    fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}/leaderboard`, {
                         headers: { 'Authorization': `Bearer ${idToken}` }
                     }),
-                    fetch(`http://localhost:5000/api/contests/${contestId}`, {
+                    fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}`, {
                         headers: { 'Authorization': `Bearer ${idToken}` }
                     })
                 ]);

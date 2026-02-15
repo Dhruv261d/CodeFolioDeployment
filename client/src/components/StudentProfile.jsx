@@ -22,12 +22,12 @@ function StudentProfile({ onSolveClick, onPracticeClick }) {
             if (!auth.currentUser) return;
             try {
                 const idToken = await auth.currentUser.getIdToken();
-                const profileResponse = await fetch('http://localhost:5000/api/users/profile', { headers: { 'Authorization': `Bearer ${idToken}` } });
+                const profileResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/users/profile`, { headers: { 'Authorization': `Bearer ${idToken}` } });
                 if (!profileResponse.ok) throw new Error('Failed to fetch profile data.');
                 const profileData = await profileResponse.json();
                 setProfileData(profileData);
 
-                const historyResponse = await fetch('http://localhost:5000/api/users/rating-history', { headers: { 'Authorization': `Bearer ${idToken}` } });
+                const historyResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/users/rating-history`, { headers: { 'Authorization': `Bearer ${idToken}` } });
                 if (!historyResponse.ok) throw new Error('Failed to fetch rating history.');
                 const historyData = await historyResponse.json();
                 setRatingHistory(historyData);

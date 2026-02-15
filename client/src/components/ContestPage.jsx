@@ -16,8 +16,8 @@ function ContestPage({ contestId, onBack, onSolveClick }) {
             try {
                 const idToken = await auth.currentUser.getIdToken();
                 const [contestRes, problemsRes] = await Promise.all([
-                    fetch(`http://localhost:5000/api/contests/${contestId}`, { headers: { 'Authorization': `Bearer ${idToken}` } }),
-                    fetch(`http://localhost:5000/api/contests/${contestId}/problems`, { headers: { 'Authorization': `Bearer ${idToken}` } })
+                    fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}`, { headers: { 'Authorization': `Bearer ${idToken}` } }),
+                    fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}/problems`, { headers: { 'Authorization': `Bearer ${idToken}` } })
                 ]);
 
                 if (!contestRes.ok) throw new Error('Failed to fetch contest details.');

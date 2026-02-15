@@ -39,7 +39,7 @@ function ContestList({ onAddProblemClick, setContestView }) {
         try {
             setLoading(true);
             const idToken = await auth.currentUser.getIdToken();
-            const response = await fetch('http://localhost:5000/api/contests', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contests`, {
                 headers: { 'Authorization': `Bearer ${idToken}` }
             });
 
@@ -66,7 +66,7 @@ function ContestList({ onAddProblemClick, setContestView }) {
         setMessage('Finalizing...');
         try {
             const idToken = await auth.currentUser.getIdToken();
-            const response = await fetch(`http://localhost:5000/api/contests/${contestId}/finalize`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}/finalize`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${idToken}` }
             });

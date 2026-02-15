@@ -15,7 +15,7 @@ function LiveSessionsAdmin() {
         try {
             if (!auth.currentUser) throw new Error('Authentication error.');
             const idToken = await auth.currentUser.getIdToken();
-            const response = await fetch('http://localhost:5000/api/sessions/add', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sessions/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

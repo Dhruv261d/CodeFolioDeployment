@@ -28,7 +28,7 @@ function LiveSessionsStudent() {
       }
       try {
         const idToken = await auth.currentUser.getIdToken();
-        const response = await fetch('http://localhost:5000/api/sessions', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sessions`, {
           headers: { 'Authorization': `Bearer ${idToken}` }
         });
         if (!response.ok) {

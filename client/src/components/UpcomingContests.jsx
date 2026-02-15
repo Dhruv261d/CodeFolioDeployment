@@ -19,7 +19,7 @@ function UpcomingContests({ onLeaderboardClick }) {
       }
       try {
         const idToken = await user.getIdToken();
-        const response = await fetch('http://localhost:5000/api/student/contests', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/contests`, {
           headers: { 'Authorization': `Bearer ${idToken}` }
         });
 

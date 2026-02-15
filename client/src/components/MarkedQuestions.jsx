@@ -16,7 +16,7 @@ function MarkedQuestions({ onSolveClick }) {
             }
             try {
                 const idToken = await auth.currentUser.getIdToken();
-                const response = await fetch('http://localhost:5000/api/users/marked-questions', {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/marked-questions`, {
                     headers: { 'Authorization': `Bearer ${idToken}` }
                 });
                 if (!response.ok) {

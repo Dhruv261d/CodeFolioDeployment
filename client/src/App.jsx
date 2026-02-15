@@ -17,9 +17,12 @@ function App() {
         // If a user is logged into Firebase, fetch their role from our backend
         try {
           const idToken = await firebaseUser.getIdToken();
-          const response = await fetch('http://localhost:5000/api/auth/me', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
             headers: { 'Authorization': `Bearer ${idToken}` }
           });
+          // const response = await fetch('http://localhost:5000/api/auth/me', {
+          //   headers: { 'Authorization': `Bearer ${idToken}` }
+          // });
 
           if (!response.ok) {
             // If the user exists in Firebase Auth but not in our database, sign them out.

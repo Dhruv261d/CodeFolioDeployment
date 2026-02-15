@@ -14,7 +14,7 @@ function ContestHistory({ onPracticeClick, onLeaderboardClick, isEmbedded = fals
       if (!auth.currentUser) return;
       try {
         const idToken = await auth.currentUser.getIdToken();
-        const response = await fetch('http://localhost:5000/api/student/contests/history', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/contests/history`, {
           headers: { 'Authorization': `Bearer ${idToken}` }
         });
         if (!response.ok) throw new Error('Failed to fetch contest history.');

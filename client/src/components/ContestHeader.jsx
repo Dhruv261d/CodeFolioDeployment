@@ -25,7 +25,7 @@ function ContestHeader({ contestId }) {
             if (!auth.currentUser || !contestId) return;
             try {
                 const idToken = await auth.currentUser.getIdToken();
-                const response = await fetch(`http://localhost:5000/api/contests/${contestId}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}`, {
                     headers: { 'Authorization': `Bearer ${idToken}` }
                 });
                 if (response.ok) {

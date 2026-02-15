@@ -32,7 +32,7 @@ function ProblemSolvingPage({ problemId, onBack, isPracticeMode = false }) {
             }
             try {
                 const idToken = await auth.currentUser.getIdToken();
-                const response = await fetch(`http://localhost:5000/api/problems/${problemId}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/problems/${problemId}`, {
                     headers: { 'Authorization': `Bearer ${idToken}` }
                 });
                 if (!response.ok) {
@@ -57,7 +57,7 @@ function ProblemSolvingPage({ problemId, onBack, isPracticeMode = false }) {
             if (!auth.currentUser || !problemId) return;
             try {
                 const idToken = await auth.currentUser.getIdToken();
-                const response = await fetch(`http://localhost:5000/api/problems/${problemId}/bookmark-status`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/problems/${problemId}/bookmark-status`, {
                     headers: { 'Authorization': `Bearer ${idToken}` }
                 });
                 const data = await response.json();
@@ -120,7 +120,7 @@ function ProblemSolvingPage({ problemId, onBack, isPracticeMode = false }) {
         setFailedTestCase(null);
         try {
             const idToken = await auth.currentUser.getIdToken();
-            const response = await fetch('http://localhost:5000/api/execute/run', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/execute/run`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ function ProblemSolvingPage({ problemId, onBack, isPracticeMode = false }) {
     try {
       if (!auth.currentUser) throw new Error("Authentication error.");
       const idToken = await auth.currentUser.getIdToken();
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -190,7 +190,7 @@ function ProblemSolvingPage({ problemId, onBack, isPracticeMode = false }) {
         if (!auth.currentUser || !problemId) return;
         try {
             const idToken = await auth.currentUser.getIdToken();
-            const response = await fetch(`http://localhost:5000/api/problems/${problemId}/bookmark`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/problems/${problemId}/bookmark`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${idToken}` }
             });

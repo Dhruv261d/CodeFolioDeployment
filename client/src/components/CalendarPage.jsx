@@ -27,7 +27,7 @@ function CalendarPage() {
             }
             try {
                 const idToken = await auth.currentUser.getIdToken();
-                const response = await fetch('http://localhost:5000/api/contests/all', {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contests/all`, {
                     headers: { 'Authorization': `Bearer ${idToken}` }
                 });
                 if (!response.ok) {
